@@ -1,0 +1,237 @@
+﻿@model Buturlinskoe.Logic.DomainModels.Contact
+
+
+
+<style>
+    /* Общие стили из главной страницы */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .feedbackpanel {
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+    }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+            nav ul li a {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                nav ul li a:hover {
+                    color: #3498db;
+                }
+
+    /* Секция обратной связи */
+    .feedback {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 36px;
+        margin-bottom: 40px;
+        position: relative;
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: #3498db;
+            bottom: -10px;
+            left: 25%;
+        }
+
+    .feedback-form {
+        max-width: 600px;
+        margin: 0 auto;
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+    .file-input {
+        display: none;
+    }
+
+    .file-label {
+        display: block;
+        padding: 12px;
+        border: 2px dashed #3498db;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+        .file-label:hover {
+            background-color: #f0f8ff;
+        }
+
+    .file-name {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #7f8c8d;
+    }
+
+    .btn-submit {
+        display: block;
+        width: 100%;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .btn-submit:hover {
+            background-color: #2980b9;
+        }
+
+    .success-message {
+        display: none;
+        text-align: center;
+        color: #2ecc71;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    /* Подвал (такой же как на главной) */
+    footer {
+        background-color: #1a252f;
+        color: #7f8c8d;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 14px;
+    }
+
+    /* Анимации */
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .fade-in {
+        animation: fadeIn 0.5s ease-out;
+    }
+</style>
+
+
+<class ="feedbackpanel">
+
+    <section class="feedback">
+        <div class="container">
+            <h2 class="section-title fade-in">Обратная связь</h2>
+            <div class="feedback-form fade-in">
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label> <input type="text" id="name" name="name"
+                                                                  required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Ваш email</label> <input type="email" id="email"
+                                                                    name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Тема сообщения</label> <select id="subject"
+                                                                            name="subject">
+                            <option value="question">Вопрос</option>
+                            <option value="suggestion">Предложение</option>
+                            <option value="complaint">Жалоба</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Ваше сообщение</label> <textarea id="message"
+                                                                              name="message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Прикрепить файлы (до 5 МБ)</label> <input type="file" id="fileInput"
+                                                                         class="file-input" multiple> <label for="fileInput" class="file-label">
+                            <span>
+                                Перетащите
+                                файлы сюда или кликните для выбора
+                            </span>
+                            <div class="file-name" id="fileName">Файлы не выбраны</div>
+                        </label>
+                    </div> <button type="submit" class="btn-submit">Отправить сообщение</button>
+                    <div class="success-message" id="successMessage">
+                        Ваше сообщение успешно отправлено! Мы свяжемся с
+                        вами в ближайшее время.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</class>

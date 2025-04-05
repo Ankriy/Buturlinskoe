@@ -1,0 +1,415 @@
+﻿@model Buturlinskoe.Logic.DomainModels.Information
+
+
+<style>
+    /* Общие стили (как на главной) */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .aboutuspanel {
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+    }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+            nav ul li a {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                nav ul li a:hover {
+                    color: #3498db;
+                }
+
+    /* Герой-секция */
+    .about-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x600?text=О+компании');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+        margin-bottom: 40px;
+    }
+
+        .about-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+    /* Основное содержимое */
+    .about-content {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 36px;
+        margin-bottom: 40px;
+        position: relative;
+        text-align: center;
+    }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: #3498db;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+    .about-text {
+        max-width: 800px;
+        margin: 0 auto 40px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    /* Блоки с информацией */
+    .info-blocks {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+
+    .info-block {
+        flex: 1;
+        min-width: 300px;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+        .info-block h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 24px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+            .info-block h3::after {
+                content: '';
+                position: absolute;
+                width: 50px;
+                height: 2px;
+                background-color: #3498db;
+                bottom: 0;
+                left: 0;
+            }
+
+    /* Хронология */
+    .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto 60px;
+        padding-left: 50px;
+    }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #3498db;
+        }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #eee;
+    }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+    .timeline-year {
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        background-color: #3498db;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .timeline-content {
+        padding-left: 30px;
+    }
+
+        .timeline-content h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+    /* Команда */
+    .team {
+        background-color: #ecf0f1;
+        padding: 60px 0;
+    }
+
+    .team-members {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+    }
+
+    .team-member {
+        width: 250px;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s;
+    }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+    .member-photo {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .member-info {
+        padding: 20px;
+    }
+
+    .member-name {
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+
+    .member-position {
+        color: #3498db;
+        font-style: italic;
+        margin-bottom: 15px;
+    }
+
+    /* Цифры */
+    .stats {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin: 60px 0;
+    }
+
+    .stat-item {
+        text-align: center;
+        min-width: 200px;
+    }
+
+    .stat-number {
+        font-size: 48px;
+        font-weight: bold;
+        color: #3498db;
+        margin-bottom: 10px;
+    }
+
+    .stat-label {
+        color: #7f8c8d;
+        font-size: 18px;
+    }
+
+    /* Анимации */
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .fade-in {
+        animation: fadeIn 0.5s ease-out;
+    }
+</style>
+
+
+
+<div class="aboutuspanel">
+    <section class="about-hero fade-in">
+        <div class="container">
+            <h1>О нашей компании</h1>
+            <p>Более 10 лет создаем цифровые решения для бизнеса</p>
+        </div>
+    </section> <!-- Основное содержимое -->
+    <section class="about-content">
+        <div class="container">
+            <h2 class="section-title fade-in">Наша история</h2>
+            <p class="about-text fade-in">
+                Мы начали свой путь в 2012 году как небольшая студия веб-разработки. Сегодня
+                мы - команда из 50+ профессионалов, предлагающая полный цикл цифровых услуг для бизнеса любого масштаба.
+            </p> <!-- Хронология -->
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-year">2012</div>
+                    <div class="timeline-content">
+                        <h4>Основание компании</h4>
+                        <p>Создана студия веб-разработки с командой из 3 человек. Первый офис в Москве.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h4>Расширение услуг</h4>
+                        <p>Добавлены услуги по дизайну и маркетингу. Команда выросла до 15 специалистов.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-content">
+                        <h4>Международные проекты</h4>
+                        <p>Начали работать с клиентами из Европы и США. Открыли представительство в Берлине.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-content">
+                        <h4>Полный цикл разработки</h4>
+                        <p>Запустили собственный R&D центр. Теперь предлагаем комплексные IT-решения "под ключ".</p>
+                    </div>
+                </div>
+            </div> <!-- Миссия и ценности -->
+            <h2 class="section-title fade-in">Наши принципы</h2>
+            <div class="info-blocks">
+                <div class="info-block fade-in">
+                    <h3>Миссия</h3>
+                    <p>
+                        Мы помогаем бизнесу раскрывать свой потенциал через цифровые технологии, создавая не просто
+                        продукты, а решения, которые действительно работают.
+                    </p>
+                </div>
+                <div class="info-block fade-in">
+                    <h3>Видение</h3>
+                    <p>
+                        Стать лидером в создании инновационных цифровых решений в Восточной Европе к 2025 году, сохраняя
+                        индивидуальный подход к каждому клиенту.
+                    </p>
+                </div>
+                <div class="info-block fade-in">
+                    <h3>Ценности</h3>
+                    <ul style="list-style-position: inside; line-height: 1.8;">
+                        <li>Клиентоориентированность</li>
+                        <li>Инновации</li>
+                        <li>Профессионализм</li>
+                        <li>Прозрачность</li>
+                        <li>Ответственность</li>
+                    </ul>
+                </div>
+            </div> <!-- Цифры -->
+            <div class="stats fade-in">
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Завершенных проектов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Специалистов</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Технологий</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Лет опыта</div>
+                </div>
+            </div>
+        </div>
+    </section> <!-- Команда -->
+    <!-- Команда -->
+    <section class="team">
+        <div class="container">
+            <h2 class="section-title fade-in">Наша команда</h2>
+            <p class="about-text fade-in">
+                Наши специалисты - это профессионалы с международным опытом,
+                которые постоянно развиваются и следят за новейшими тенденциями в IT.
+            </p>
+
+            <div class="team-members">
+                <div class="team-member fade-in">
+                    <img src="https://masterpiecer-images.s3.yandex.net/5fc2dd5960518b5:upscaled" alt="Алексей Петров" class="member-photo">
+                    <div class="member-info">
+                        <h3 class="member-name">Алексей Петров</h3>
+                        <p class="member-position">CEO, Основатель</p>
+                    </div>
+                </div>
+
+                <div class="team-member fade-in">
+                    <img src="https://img.freepik.com/premium-photo/cat-manager-in-a-suit-sitting-in-the-office_906149-11076.jpg?size=626&ext=jpg" alt="Елена Смирнова" class="member-photo">
+                    <div class="member-info">
+                        <h3 class="member-name">Елена Смирнова</h3>
+                        <p class="member-position">Арт-директор</p>
+                    </div>
+                </div>
+
+                <div class="team-member fade-in">
+                    <img src="https://avatars.mds.yandex.net/i?id=0d4b39f4ee6aa641ca891790a7963494_l-12914725-images-thumbs&n=13" alt="Дмитрий Иванов" class="member-photo">
+                    <div class="member-info">
+                        <h3 class="member-name">Дмитрий Иванов</h3>
+                        <p class="member-position">CTO</p>
+                    </div>
+                </div>
+
+                <div class="team-member fade-in">
+                    <img src="https://sun9-57.userapi.com/impg/ZDYHqXG-2hYfc0jxkc473XHvclsjEdkmOKrYcg/ARmzRkHdYWU.jpg?size=1200x733&quality=95&sign=261d85001912cc1383009c7ed8ec698d&c_uniq_tag=80aRX990_-GSeUpRtE4SK80eM9B6WY8qT84JdlCNrAE&type=album" alt="Ольга Кузнецова" class="member-photo">
+                    <div class="member-info">
+                        <h3 class="member-name">Ольга Кузнецова</h3>
+                        <p class="member-position">Маркетинг-директор</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

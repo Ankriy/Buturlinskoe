@@ -1,0 +1,41 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/Buturlinskoe.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css">
+    <link href="~/wwwroot/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Компания</div>
+            <nav>
+                <ul>
+                    <li><a asp-controller="Home" asp-action="Index">Главная</a></li>
+                    <li><a asp-controller="Contact" asp-action="GetContacts">Обратная связь</a></li>
+                    <li><a id="aboutLink" asp-controller="Information" asp-action="GetInformation">О нас</a></li>
+                    <li><a asp-controller="Yslygi" asp-action="GetYslygi">Услуги</a></li>
+                    @* <li> *@
+                    @*     <a href ="#">Проекты</a> *@
+                    @* </li> *@
+                    <li><a asp-controller="AdminPanel" asp-action="Admin">Админка</a></li>
+                    <li><a class="login-link" asp-controller="Authorize" asp-action="Authorize">Войти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="content">
+        @RenderBody()
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Компания. Все права защищены.</p>
+        </div>
+    </footer>
+    <script src="~/js/bootstrap.min.css"></script>
+</body>
+</html>
