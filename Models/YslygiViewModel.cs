@@ -11,6 +11,9 @@ namespace Buturlinskoe.Models
         public string Adress { get; set; }
 
         public string Phone { get; set; }
+        public YslygiViewModel()
+        {
+        }
         public YslygiViewModel(Contact contact)
         {
             Name = contact.Name;
