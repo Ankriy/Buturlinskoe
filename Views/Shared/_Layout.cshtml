@@ -22,8 +22,19 @@
                     @* <li> *@
                     @*     <a href ="#">Проекты</a> *@
                     @* </li> *@
-                    <li><a asp-controller="AdminPanel" asp-action="Admin">Админка</a></li>
-                    <li><a class="login-link" asp-controller="Authorize" asp-action="Authorize">Войти</a></li>
+                    
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-controller="AdminPanel" asp-action="Admin">Админка</a></li>
+                        <li><a class="login-link" asp-controller="Authorize" asp-action="Register">Зарегестрировать пользователя</a></li>
+                        <li><a class="login-link" asp-controller="Authorize" asp-action="Logout">Выйти</a></li>
+                    }
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li><a class="login-link" asp-controller="Authorize" asp-action="Login">Войти</a></li>
+                    }
+
+                    
                 </ul>
             </nav>
         </div>

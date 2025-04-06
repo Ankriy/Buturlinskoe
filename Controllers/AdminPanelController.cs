@@ -1,9 +1,11 @@
 ﻿using Buturlinskoe.Models;
 using Microsoft.AspNetCore.Mvc;
 using Buturlinskoe.Logic.DomainModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Buturlinskoe.Controllers
 {
+    [Authorize]
     public class AdminPanelController : Controller
     {
         private readonly ILogger<AdminPanelController> _logger;

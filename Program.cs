@@ -2,6 +2,7 @@ using Buturlinskoe.EF;
 using Buturlinskoe.EF.Repositories;
 using Buturlinskoe.EF.Repositories.Abstract;
 using Buturlinskoe.EF.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,10 +22,19 @@ var connectionStringEF = builder.Configuration.GetConnectionString("NpgsqlConnec
 builder.Services.AddDbContext<PostgreeContext>(
     options => options.UseNpgsql(connectionStringEF));
 
+//Авторизация
 builder.Services.AddScoped<IUserRepository, UserEFPostgreeRepository>();
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<PostgreeContext>()
+    .AddDefaultTokenProviders();
 
-
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+//Конец авторизации
 
 var app = builder.Build();
 
@@ -41,6 +51,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
