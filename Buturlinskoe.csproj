@@ -4,9 +4,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>10a852bb-97db-4b9b-ad6b-59796939eee3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Buturlinskoe.EF\Buturlinskoe.EF.csproj" />
     <ProjectReference Include="..\Buturlinskoe.Logic\Buturlinskoe.Logic.csproj" />
   </ItemGroup>
 
